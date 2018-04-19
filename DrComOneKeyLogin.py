@@ -1,10 +1,11 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import urllib.request
 import urllib.parse
 import sys
 
-def login(username: str, password: str):
+
+def login(username, password):
     data = {
         'DDDDD': username,  
         'upass': password,  
@@ -32,12 +33,22 @@ def login(username: str, password: str):
     request = urllib.request.Request(url, headers=header, data=data)
     page = urllib.request.urlopen(request).read()  
     page = page.decode('gb2312')
+    if len(page) == 3942:
+        print('Success.')
+    else:
+        print('Fail.')
+
+    # 3942 -> ok
+    # 5696 -> error
 
 def logout():
     url = 'http://192.168.168.168/F.htm'
     request = urllib.request.Request(url)
     page = urllib.request.urlopen(request).read()
     page = page.decode('gb2312')
+    print('Success.')
+
+
 
 if __name__ == "__main__":
     option = sys.argv[1]
